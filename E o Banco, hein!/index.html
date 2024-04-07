@@ -1,0 +1,143 @@
+<html>
+
+<head>
+
+	<script>
+		var saldo = 900.9; //Float
+		var nome = (prompt('Qual é o seu nome?'));
+		function inicio() {
+
+			var escolha = parseInt(prompt('Olá ' + nome + ', seja bem vindo!' + '\nSelecione uma opção \n 1) Saldo\n 2) Extrato\n 3) Saque\n 4) Depósito\n 5) Transfêrencia\n 6) Sair'));
+
+			switch (escolha) {
+				case 1:
+					senha();
+					ver_saldo();
+					break;
+				case 2:
+					senha();
+					ver_extrato();
+					break;
+				case 3:
+					senha();
+					fazer_saque();
+					break;
+				case 4:
+					senha();
+					fazer_deposito();
+					break;
+				case 5:
+					senha();
+					fazer_transferencia();
+					break;
+				case 6:
+					senha();
+					sair();
+					break;
+				default:
+					erro();
+			}
+		}
+
+		function ver_saldo() {
+			alert('Seu saldo atual é: ' + saldo);
+			inicio();
+		}
+
+		function senha(){
+			var senha = (prompt('Insira sua senha'));
+			while(senha !== "3589"){
+				alert('Senha incorreta');
+				senha = (prompt('Digite novamente'));
+			}
+		}
+
+		function ver_extrato() {
+			alert('22/03 - PIX | Kabum -> -3.550,00\n' +
+				'24/03 - Débito | Chiquinho -> -35,00\n' +
+				'24/03 - Crédito | Iplace -> -5.000,00\n' +
+				'24/03 - Débito | Nissan -> -121.999,99\n' +
+				'27/03 - Débito | Point do Gordão -> -350,00\n' +
+				'01/04 - Crédito | Taxi -> -150,70\n' +
+				'01/04 - PIX | Terabyte -> +15.000,00\n' +
+				'01/04 - PIX | Outback -> -500,00\n' +
+				'02/04 - Débito | Tok&Stok -> -4.000,00\n' +
+				'02/04 - PIX | Steam -> -500,00\n' +
+				'02/04 - PIX | Carrefour -> -1.000,00\n' +
+				'\nSaldo Atual: R$ ' + saldo);
+			inicio();
+		}
+
+		function fazer_deposito() {
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			// Not a Number
+			if (isNaN(deposito) || deposito === '') {
+				alert('Por favor, informe um número:');
+				fazer_deposito();
+			} else if (deposito <= 0) {
+				alert('Opção não autorizada');
+				fazer_deposito();
+			} else {
+				saldo += deposito;
+				ver_saldo();
+			}
+		}
+
+		function fazer_transferencia() {
+			var conta = parseFloat(prompt('Qual o número da conta?'));
+
+			if (isNaN(conta) || conta === '') {
+				alert('Por favor, informe um número válido.');
+				fazer_transferencia();
+			} else {
+				var transferencia = parseFloat(prompt('Qual o valor a ser transferido?'));
+				if (transferencia > saldo || transferencia <= 0) {
+					alert('Opção não autorizada');
+					fazer_transferencia();
+				} else {
+					saldo -= transferencia;
+					ver_saldo();
+				}
+			}
+		}
+
+		function fazer_saque() {
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+
+			if (isNaN(saque) || saque === '') {
+				alert('Por favor, informe um número válido.');
+				fazer_saque();
+			} else if (saque > saldo || saque <= 0) {
+				alert('Opção não autorizada');
+				fazer_saque();
+			} else {
+				saldo -= saque;
+				ver_saldo();
+			}
+		}
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 6');
+			inicio();
+		}
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				window.close();
+			} else {
+				inicio();
+			}
+		}
+
+
+
+		inicio();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
